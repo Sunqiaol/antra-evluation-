@@ -1,9 +1,46 @@
 #app{
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: space-evenly;
+    
 }
 
 
 
+.inventory-item{
+    background-color: bisque;
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+    
+}
 
+.inventory__item_minus-btn{
+    background-color: red;
+    color:white;
+    border-radius: 4px;
+
+}
+
+.inventory__item_add-btn{
+    background-color: chartreuse;
+    color: white;
+    border-radius: 4px;
+}
+
+.inventory__item_add_to_cart-btn{
+    background-color: blue;
+    color:white;
+    border-radius: 6px;
+}
+
+
+.cart-item{
+    background-color: bisque;
+}
+
+.checkout-btn{
+    background-color: black;
+    color:white;
+    width: 100%;
+}

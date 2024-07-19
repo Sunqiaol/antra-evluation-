@@ -21,6 +21,7 @@ const API = (() => {
   }
 
   const updateInventory = async (id, content, updatedAmount) => {
+   
     return fetch(`${URL + "/inventory"}/${id}`, {
       method: "PUT",
       headers: {
@@ -32,6 +33,7 @@ const API = (() => {
 
 
   const addToCart = (inventoryItem) => {
+    
     return fetch(URL + "/cart", {
       method: "POST",
       headers: {
@@ -150,9 +152,9 @@ const View = (() => {
     inventory.forEach((inventory) => {
       const inventoryItemTemp = `<li id=${inventory.id}>
       <span>${inventory.content}</span>
-      <button class="inventory__item_minus-btn"> - </button>
+      <button class="inventory__item_minus-btn" "> - </button>
       <span>${inventory.amount}</span>
-      <button class="inventory__item_add-btn"> + </button>
+      <button class="inventory__item_add-btn" " > + </button>
       <button class="inventory__item_add_to_cart-btn">add to cart</button>
     </li>`;
       inventoryTemp += inventoryItemTemp;
@@ -226,8 +228,8 @@ const Controller = ((model, view) => {
         model.getInventoryById(id).then((item) => {
           model.getCartById(id).then((curCartItem) => {
             if (!curCartItem.id || !curCartItem) {
-              console.log(curCartItem)
-              model
+              if(item.amount !== 0){
+                model
                 .addToCart(item)
                 .then(() => {
                   return model.getInventory();
@@ -235,9 +237,10 @@ const Controller = ((model, view) => {
                 .then((data) => {
                   state.inventory = data;
                 });
+              }
             } else {
-              if (curCartItem.amount === 0) {
-                console.log("it empty")
+              if (item.amount === 0) {
+                console.log("it empty");
               } else {
                 model
                   .updateCart(id, item.content, curCartItem.amount + item.amount)
